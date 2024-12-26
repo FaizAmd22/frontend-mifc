@@ -23,6 +23,9 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Check dist folder
+        run: ls -la ./dist
+
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
         with:
@@ -42,8 +45,17 @@ jobs:
           name: production-files
           path: ./dist
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Verify downloaded artifact
+        run: ls -la ./dist
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          enable_debug_log: true

@@ -1,4 +1,4 @@
-import CanvasComponent from "./components/canvas";
+import CanvasComponent from "./components/Canvas";
 
 const ClutchDisk = () => {
   return (
